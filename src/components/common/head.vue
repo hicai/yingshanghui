@@ -27,7 +27,7 @@ export default {
  .head{
     width: 100%;
     height: 60px;
-    background: #66bfe2;
+    background: #8672ad;
     overflow: hidden;
     .head_logo{
        float: left;

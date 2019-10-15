@@ -5,20 +5,31 @@ import Login from './views/Login.vue'
 Vue.use(Router)
 
 export default new Router({
+   mode: 'history',
+  // // base: process.env.BASE_URL,
+  // base: '/yiTownWebApp/',//这个配置也很重要，否则会出现页面空白情况
+  // linkActiveClass: 'active', //当router-link被激活时，给它一个默认的class
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '/home',
       name: 'home',
-      component: Home
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: Home,
+      redirect: '/search',
+      children: [
+        {
+          path: 'search',
+          component: (() => import(/* webpackChunkName: "group-foo" */ './components/contain/search.vue')),     
+        },
+        {
+          path: 'add',
+          component: (() => import(/* webpackChunkName: "group-foo" */ './components/contain/add.vue')),     
+        },
+        {
+          path: 'detail',
+          component: (() => import('./components/contain/detailData.vue')),     
+        }
+      ]
     }
   ]
 })
